@@ -1,14 +1,19 @@
 package com.tweetapp.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
+@Document
+@AllArgsConstructor
 @Data
+@NoArgsConstructor
 public class User {
 
 	@Id
@@ -18,5 +23,6 @@ public class User {
 	private String gender;
 	private LocalDate birthDate;
 	private String password;
+	private List<Tweet> tweets;
 	
 }
