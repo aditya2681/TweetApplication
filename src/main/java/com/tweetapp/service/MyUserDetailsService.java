@@ -21,6 +21,7 @@ public class MyUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		User user = userrepo.findById(username).get();
+		
 
 		return new org.springframework.security.core.userdetails.User(user.getEmailId(), user.getPassword(),
 				new ArrayList<>());
