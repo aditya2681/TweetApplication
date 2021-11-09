@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.tweetapp.model.Replies;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,10 +43,10 @@ public class Tweet {
 	public void setLikes(List<String> likes) {
 		this.likes = likes;
 	}
-	public Map<String, String> getReplies() {
+	public List<Replies> getReplies() {
 		return replies;
 	}
-	public void setReplies(Map<String, String> replies) {
+	public void setReplies(List<Replies> replies) {
 		this.replies = replies;
 	}
 	public String getEmailId() {
@@ -59,7 +61,7 @@ public class Tweet {
 	public void setId(int id) {
 		this.id = id;
 	}
-	private Map<String, String> replies;
+	private List<Replies> replies;
 	
 
 }

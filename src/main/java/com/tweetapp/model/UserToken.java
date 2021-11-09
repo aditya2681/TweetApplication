@@ -13,7 +13,13 @@ public class UserToken {
 		this.jwt = jwt;
 	}
 
+	public UserToken(String errormessage) {
+		super();
+		this.errormessage = errormessage;
+	}
+
 	private String emailid;
+	private String errormessage;
 	
 	public String getEmailid() {
 		return emailid;
@@ -29,6 +35,14 @@ public class UserToken {
 
 	public void setJwt(String jwt) {
 		this.jwt = jwt;
+	}
+
+	public String getErrormessage() {
+		return errormessage;
+	}
+
+	public void setErrormessage(String errormessage) {
+		this.errormessage = errormessage;
 	}
 
 	private String jwt;
