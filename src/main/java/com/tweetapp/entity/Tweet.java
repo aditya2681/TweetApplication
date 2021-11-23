@@ -28,6 +28,11 @@ public class Tweet {
 	
 	private String emailId;
 	
+	private String date;
+	
+	private String time;
+	
+	
 	private String tweet;
 	private List<String> likes;   
 	public String getTweet() {
@@ -61,7 +66,27 @@ public class Tweet {
 	public void setId(int id) {
 		this.id = id;
 	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	public List<String> getTags() {
+		return tags;
+	}
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
 	private List<Replies> replies;
+	
+	private List<String> tags;
 	
 
 }
