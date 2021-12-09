@@ -18,7 +18,10 @@ import com.tweetapp.model.Replies;
 import com.tweetapp.model.TweetText;
 import com.tweetapp.repository.TweetRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class TweetService {
 	
 	
@@ -45,6 +48,7 @@ public class TweetService {
 	public void deleteTweet(int id) {
 		tweetrepository.deleteById(id);
 		// TODO Auto-generated method stub
+		log.info("Tweet Deleted succesfully");
 		
 	}
 	@Autowired
@@ -55,7 +59,7 @@ public class TweetService {
 
 	public ResponseEntity<?> addTweet(Tweet tweet) {
 		try {
-			User user = userService.findUserById(tweet.getEmailId()).get();
+//			User user = userService.findUserById(tweet.getEmailId()).get();
 			List<Replies> reply = new ArrayList<>();
 			List<String> likes = new ArrayList<>();
 
@@ -68,6 +72,7 @@ public class TweetService {
 			tweet.setTime(formatter.format(LocalDateTime.now()));
 	           
 			Tweet t = this.savetweet(tweet);
+			log.info("Succesfully saved into the repository");
 			return new ResponseEntity<>(this.getAllTweets(), HttpStatus.OK);
 		} catch (Exception e) {
 
@@ -80,8 +85,10 @@ public class TweetService {
 		Tweet tweet1 = this.findTweetById(id);
 		if (tweet1.getLikes().contains(like.getLike())) {
 			tweet1.getLikes().remove(like.getLike());
+			log.info("Unlike for tweet");
 		} else {
 			tweet1.getLikes().add(like.getLike());
+			log.info("Like for tweet");
 		}
 		Tweet save = this.savetweet(tweet1);
 		return new ResponseEntity<>(save, HttpStatus.OK);
@@ -97,6 +104,7 @@ public class TweetService {
 			this.savetweet(tweet1);
 			tweet2=this.getAllTweets();
 		}
+		log.info("Tweet Updated");
 		return new ResponseEntity<>(tweet2, HttpStatus.OK);
 	}
 
@@ -106,6 +114,7 @@ public class TweetService {
 		Tweet t = this.findTweetById(tweetid);
 		t.getReplies().add(reply);
 		this.savetweet(t);
+		log.info("Comment added to the tweet=>"+ t);
 		return new ResponseEntity<>(t, HttpStatus.OK);
 	}
 

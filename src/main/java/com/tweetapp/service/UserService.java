@@ -16,15 +16,16 @@ import com.tweetapp.model.UserCreatedResposne;
 import com.tweetapp.model.UserToken;
 import com.tweetapp.repository.UserRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class UserService {
 	
-	@Autowired
-	 MyUserDetailsService userDetailService;
+
 	
 	
-	@Autowired
-	 JwtUtil tokenUtil;
+
 	
 	@Autowired
 	UserRepository repo;
@@ -45,28 +46,7 @@ public class UserService {
 		return repo.findById(emailId);
 	}
 
-	public  ResponseEntity<?> validateLogin(LoginCredentials loginDetails) {
-		// TODO Auto-generated method stub
-		String generateToken = null;
 
-		try {
-			final UserDetails userDetails = userDetailService.loadUserByUsername(loginDetails.getEmailid());
-			if (!(loginDetails.getPassword().equals(userDetails.getPassword())))
-				throw new Exception("Invalid Credetnials");
-			generateToken = tokenUtil.generateToken(userDetails);
-		} catch (Exception e) {
-			if (e.getMessage().equals("Invalid Credetnials")) {
-				return new ResponseEntity<>(new UserToken("Password is Incorrect"), HttpStatus.OK);
-			}
-			if (e.getMessage().equals("No value present")) {
-
-				return new ResponseEntity<>(new UserToken("Username or Password Doesn't exist"), HttpStatus.OK);
-			}
-		}
-		return new ResponseEntity<>(new UserToken(loginDetails.getEmailid(), generateToken), HttpStatus.OK);
-	
-		
-	}
 
 	public ResponseEntity<?> changePassword(Password password) {
 		User user = this.findUserById(password.getEmailId()).get();
@@ -76,6 +56,7 @@ public class UserService {
 			return new ResponseEntity<>(new UserCreatedResposne("Password Changed Succesfully"), HttpStatus.OK);
 
 		}
+		log.info("Old Password Incorrect");
 		return new ResponseEntity<>(new UserCreatedResposne("Your Old Password is Incorrect"), HttpStatus.OK);
 
 	}
