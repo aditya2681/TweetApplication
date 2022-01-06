@@ -56,7 +56,7 @@ public class UserService {
 			return new ResponseEntity<>(new UserCreatedResposne("Password Changed Succesfully"), HttpStatus.OK);
 
 		}
-		log.info("Old Password Incorrect");
+//		log.info("Old Password Incorrect");
 		return new ResponseEntity<>(new UserCreatedResposne("Your Old Password is Incorrect"), HttpStatus.OK);
 
 	}

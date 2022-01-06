@@ -48,7 +48,7 @@ public class TweetService {
 	public void deleteTweet(int id) {
 		tweetrepository.deleteById(id);
 		// TODO Auto-generated method stub
-		log.info("Tweet Deleted succesfully");
+//		log.info("Tweet Deleted succesfully");
 		
 	}
 	@Autowired
@@ -72,7 +72,7 @@ public class TweetService {
 			tweet.setTime(formatter.format(LocalDateTime.now()));
 	           
 			Tweet t = this.savetweet(tweet);
-			log.info("Succesfully saved into the repository");
+//			log.info("Succesfully saved into the repository");
 			return new ResponseEntity<>(this.getAllTweets(), HttpStatus.OK);
 		} catch (Exception e) {
 
@@ -85,10 +85,10 @@ public class TweetService {
 		Tweet tweet1 = this.findTweetById(id);
 		if (tweet1.getLikes().contains(like.getLike())) {
 			tweet1.getLikes().remove(like.getLike());
-			log.info("Unlike for tweet");
+//			log.info("Unlike for tweet");
 		} else {
 			tweet1.getLikes().add(like.getLike());
-			log.info("Like for tweet");
+//			log.info("Like for tweet");
 		}
 		Tweet save = this.savetweet(tweet1);
 		return new ResponseEntity<>(save, HttpStatus.OK);
@@ -104,7 +104,7 @@ public class TweetService {
 			this.savetweet(tweet1);
 			tweet2=this.getAllTweets();
 		}
-		log.info("Tweet Updated");
+//		log.info("Tweet Updated");
 		return new ResponseEntity<>(tweet2, HttpStatus.OK);
 	}
 
@@ -114,7 +114,7 @@ public class TweetService {
 		Tweet t = this.findTweetById(tweetid);
 		t.getReplies().add(reply);
 		this.savetweet(t);
-		log.info("Comment added to the tweet=>"+ t);
+//		log.info("Comment added to the tweet=>"+ t);
 		return new ResponseEntity<>(t, HttpStatus.OK);
 	}
 
